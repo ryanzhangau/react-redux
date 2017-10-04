@@ -24,3 +24,13 @@ $xy-grid: false;
     }
   }
 }
+
+.init {
+  border: 2px dashed #333333;
+  padding: 5px;
+  width: 800px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
