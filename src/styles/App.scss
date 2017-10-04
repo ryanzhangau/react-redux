@@ -3,31 +3,24 @@
 $xy-grid: false;
 @include foundation-everything(true);
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.anc-container {
+  display: flex;
+  .anc-modules {
+    flex-basis: 150px;
+    .module {
+      border: 1px solid #333;
+      border-radius: 5px;
+      margin-top: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80px;
+      cursor: move;
+      i {font-size: 30px;}
+      p{
+        margin: 0;
+      }
+    }
+  }
 }
