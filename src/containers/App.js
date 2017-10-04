@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 import Module from '../components/modules';
 import 'font-awesome/css/font-awesome.css';
+import DropTarget from '../components/dropTarget';
 
 class App extends Component {
   constructor(props){
@@ -25,7 +26,7 @@ class App extends Component {
             { modules }
           </div>
           <div className="anc-builder">
-
+            <DropTarget blocks={this.state.blocks} />
           </div>
         </div>
       </div>
