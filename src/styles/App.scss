@@ -1,3 +1,8 @@
+@import '../../node_modules/foundation-sites/scss/foundation';
+
+$xy-grid: false;
+@include foundation-everything(true);
+
 .App {
   text-align: center;
 }
