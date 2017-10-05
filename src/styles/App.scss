@@ -33,4 +33,7 @@ $xy-grid: false;
   display: flex;
   justify-content: center;
   align-items: center;
+  &.active {
+    border-color: red;
+  }
 }
