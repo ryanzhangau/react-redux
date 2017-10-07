@@ -34,4 +34,4 @@ export const headingData = {
   subNum: 0
 }
 
-export const headingModule = { name: 'Heading', icon: 'header', order: 1, tag: 'AncHeading' }
+export const headingBlock = {name: 'Heading', icon: 'header', order: 1, tag: 'AncHeading'}
