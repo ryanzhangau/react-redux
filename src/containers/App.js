@@ -3,6 +3,7 @@ import '../styles/App.css';
 import Module from '../components/modules';
 import 'font-awesome/css/font-awesome.css';
 import DropTarget from '../components/dropTarget';
+import Heading from '../components/blocks/Heading';
 
 class App extends Component {
   constructor(props){
@@ -19,6 +20,7 @@ class App extends Component {
 
   render() {
     const modules = this.state.modules.map((module, index)=> <Module key={index} module={module}/>);
+    const blocks = this.state.blocks.map((block) => <block.tag data={block.data}></block.tag>);
     return (
       <div className="App">
         <div className="anc-container">
@@ -27,6 +29,7 @@ class App extends Component {
           </div>
           <div className="anc-builder">
             <DropTarget blocks={this.state.blocks} />
+            { blocks }
           </div>
         </div>
       </div>
