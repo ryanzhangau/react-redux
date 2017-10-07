@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addBlock } from "../actions/blockActions";
 
-export default class DropTarget extends React.Component {
+class DropTarget extends React.Component {
   constructor(props) {
     super(props);
     this.state = { dragEnter: false };
@@ -18,14 +20,40 @@ export default class DropTarget extends React.Component {
     this.setState({ dragEnter: false });
   }
 
+  dragOver (e) {
+    e.preventDefault();
+    return false
+  }
+
+  drop(e) {
+    console.log('drop', e);
+    this.setState({ dragEnter: false });
+  }
+
   render () {
     return (
       <div className={this.getClass()}
            onDragEnter={this.dragEnger.bind(this)}
            onDragLeave={this.dragLeave.bind(this)}
+           onDragOver={this.dragOver.bind(this)}
+           onDrop={this.drop.bind(this)}
       >
         {this.props.blocks.length > 0 ? '' : 'Drop Here'}
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    block: state.blockReducer
+  }
+}
+
+const mapDispatchToProps = () => {
+  return {
+    addBlock,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DropTarget);
