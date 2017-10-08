@@ -9,7 +9,8 @@ class DropTarget extends React.Component {
   }
 
   getClass () {
-    return `${this.props.blocks.length > 0 ? 'drop-target' : 'init'}  ${this.state.dragEnter ? 'active' : ''}`;
+    return `${this.props.blockData.blocks.length > 0 ? 
+      'drop-target' : 'init'}  ${this.state.dragEnter ? 'active' : ''}`;
   }
 
   dragEnger() {
@@ -26,7 +27,8 @@ class DropTarget extends React.Component {
   }
 
   drop(e) {
-    console.log('drop', e);
+    const data = JSON.parse(e.dataTransfer.getData('opts'));
+    this.props.addBlock(data);
     this.setState({ dragEnter: false });
   }
 
@@ -38,7 +40,7 @@ class DropTarget extends React.Component {
            onDragOver={this.dragOver.bind(this)}
            onDrop={this.drop.bind(this)}
       >
-        {this.props.blocks.length > 0 ? '' : 'Drop Here'}
+        {this.props.blockData.blocks.length > 0 ? '' : 'Drop Here'}
       </div>
     )
   }
@@ -46,7 +48,7 @@ class DropTarget extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    block: state.blockReducer
+    blockData: state.blockReducer
   }
 }
 
