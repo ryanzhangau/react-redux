@@ -2,7 +2,14 @@ export default (state={ sub:[],blocks:[] }, action) => {
   const newState = { sub:[], blocks:[] }
   switch (action.type) {
     case 'ADD_BLOCK': {
-      guid();
+      if (action.payload.id === '') {
+        if (action.payload.dropAt === '') {
+          const id = guid();
+          newState.sub = state.sub.concat(id);
+          newState.blocks = state.blocks.concat({...action.payload, id});
+        }
+      }
+      console.log(action.type, action.payload, newState);
       break;
     }
     case 'REMOVE_BLOCK': {
