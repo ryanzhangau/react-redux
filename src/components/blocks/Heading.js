@@ -11,11 +11,21 @@ export default class Heading extends React.Component {
     }
   }
 
+  componentWillMount () {
+    this.setState({ tag: this.props.data.tag, text: this.props.data.text });
+  }
+
+  updateText(text) {
+
+  }
+
   render () {
     return (
       <div className='block-wrap'>
-        <this.state.tag>{this.state.text}</this.state.tag>
-        <DropTarget id={this.props.id}></DropTarget>
+        <this.state.tag>
+          <input type="text" value={this.state.text} onChange={(text) => this.updateText(text)}/>
+        </this.state.tag>
+        <DropTarget id={this.props.key}></DropTarget>
       </div>
     );
   }
@@ -26,9 +36,10 @@ export const headingData = {
   pid: '',
   dropAt: '',
   name: 'Heading',
+  type: 'Heading',
   data: {
     tag: 'h1',
-    text: '',
+    text: 'Heading',
   },
   hasSub: false,
   subNum: 0

@@ -26,6 +26,7 @@ export const textData = {
   pid: '',
   dropAt: '',
   name: 'Text',
+  type: 'Text',
   data: {
     tag: 'textarea',
     text: '',

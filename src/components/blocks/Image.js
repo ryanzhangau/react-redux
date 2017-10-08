@@ -8,13 +8,14 @@ export default class Image extends React.Component {
     this.state = {
       tag: 'img',
       src: '',
+      alt: ''
     }
   }
 
   render () {
     return (
       <div className='block-wrap'>
-        <img src={this.state.src} />
+        <img src={this.state.src} alt={this.state.alt}/>
         <DropTarget id={this.props.id}></DropTarget>
       </div>
     );
@@ -26,6 +27,7 @@ export const imageData = {
   pid: '',
   dropAt: '',
   name: 'Image',
+  type: 'Image',
   data: {
     tag: 'img',
     src: '',
