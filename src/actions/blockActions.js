@@ -6,3 +6,10 @@ export const addBlock  = (block) => {
     payload: block,
   });
 }
+
+export const updateData = (blockId, newData) => {
+  store.dispatch({
+    type: 'CHANGE_SETTINGS',
+    payload: {id: blockId, data: newData}
+  })
+}
