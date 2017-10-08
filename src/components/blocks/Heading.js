@@ -1,31 +1,36 @@
 import React from 'react';
 import DropTarget from '../dropTarget';
+import { connect } from 'react-redux';
+import { updateData } from '../../actions/blockActions'
 
-export default class Heading extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      tag: 'h1',
-      text: '',
-    }
+class Heading extends React.Component {
+
+  setText(e) {
+    this.props.updateData(this.props.id, {attr: 'text', value: e.target.value});
   }
 
-  componentWillMount () {
-    this.setState({ tag: this.props.data.tag, text: this.props.data.text });
+  getText() {
+    return this.props.blockData.blocks.filter((b) => b.id === this.props.id)[0].data.text;
   }
 
-  updateText(text) {
+  setTag(e) {
 
+  }
+
+  getTag() {
+    return this.props.blockData.blocks.filter((b) => b.id === this.props.id)[0].data.tag;
   }
 
   render () {
+    const TagName = this.getTag();
+    const value = this.getText();
     return (
       <div className='block-wrap'>
-        <this.state.tag>
-          <input type="text" value={this.state.text} onChange={(text) => this.updateText(text)}/>
-        </this.state.tag>
-        <DropTarget id={this.props.key}></DropTarget>
+        <TagName>
+          <input type="text" value={value} onChange={this.setText.bind(this)}/>
+        </TagName>
+        <DropTarget id={this.props.id} />
       </div>
     );
   }
@@ -45,4 +50,18 @@ export const headingData = {
   subNum: 0
 }
 
-export const headingBlock = {name: 'Heading', icon: 'header', order: 1, tag: 'AncHeading'}
+export const headingBlock = {name: 'Heading', icon: 'header', order: 1, tag: 'AncHeading'};
+
+const mapStateToProps = (state) => {
+  return {
+    blockData: state.blockReducer
+  }
+};
+
+const mapDispatchToProps = () => {
+  return {
+    updateData
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Heading);

@@ -1,15 +1,15 @@
 export default (state={ sub:[],blocks:[] }, action) => {
-  const newState = { sub:[], blocks:[] }
+  const newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case 'ADD_BLOCK': {
       if (action.payload.id === '') {
         if (action.payload.dropAt === '') {
           const id = guid();
-          newState.sub = state.sub.concat(id);
-          newState.blocks = state.blocks.concat({...action.payload, id});
+          newState.sub.push(id);
+          newState.blocks.push({...action.payload, id});
         }
       }
-      console.log(action.type, action.payload, newState);
+      // console.log(action.type, action.payload, newState);
       break;
     }
     case 'REMOVE_BLOCK': {
@@ -19,6 +19,9 @@ export default (state={ sub:[],blocks:[] }, action) => {
       break;
     }
     case 'CHANGE_SETTINGS' : {
+      const index = newState.sub.indexOf(action.payload.id);
+      const attr = action.payload.data.attr;
+      newState.blocks[index].data[attr] = action.payload.data.value;
       break;
     }
     default: {
