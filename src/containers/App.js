@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     const blocks = this.props.blockData.blocks.map(
       (block) => {
-        return <Block key={block.id} tag={block.type} data={block.data} />
+        return <Block key={block.id} id={block.id} tag={block.type}/>
       });
     return (
       <div className="App">
@@ -33,11 +33,11 @@ const mapStateToProps = (state) => {
   return {
     blockData: state.blockReducer
   }
-}
+};
 
 const mapDispatchToProps = () => {
   return {};
-}
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
