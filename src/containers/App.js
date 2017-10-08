@@ -3,32 +3,24 @@ import '../styles/App.css';
 import Module from '../components/modules';
 import 'font-awesome/css/font-awesome.css';
 import DropTarget from '../components/dropTarget';
-import Heading from '../components/blocks/Heading';
+import { connect } from 'react-redux';
+import Block from '../components/blocks/Block'
+
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      blocks: [],
-      modules: [
-        { name: 'Heading', icon: 'header', order: 1, tag: 'AncHeading' },
-        { name: 'Text', icon: 'text-width', order: 2, tag: 'AncText' },
-        { name: 'Image', icon: 'picture-o', order: 3, tag: 'AncImage' },
-      ]
-    }
-  }
-
   render() {
-    const modules = this.state.modules.map((module, index)=> <Module key={index} module={module}/>);
-    const blocks = this.state.blocks.map((block) => <block.tag data={block.data}></block.tag>);
+    const blocks = this.props.blockData.blocks.map(
+      (block) => {
+        return <Block key={block.id} tag={block.type} data={block.data} />
+      });
     return (
       <div className="App">
         <div className="anc-container">
           <div className="anc-modules">
-            { modules }
+            <Module />
           </div>
           <div className="anc-builder">
-            <DropTarget blocks={this.state.blocks} />
+            <DropTarget />
             { blocks }
           </div>
         </div>
@@ -37,4 +29,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    blockData: state.blockReducer
+  }
+}
+
+const mapDispatchToProps = () => {
+  return {};
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
