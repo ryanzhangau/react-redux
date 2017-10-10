@@ -1,5 +1,5 @@
 import React from 'react';
-import DropTarget from '../dropTarget';
+
 import { connect } from 'react-redux';
 import { updateData } from '../../actions/blockActions'
 
@@ -26,12 +26,9 @@ class Heading extends React.Component {
     const TagName = this.getTag();
     const value = this.getText();
     return (
-      <div className='block-wrap'>
-        <DropTarget id={this.props.id} />
         <TagName>
           <input type="text" value={value} onChange={this.setText.bind(this)}/>
         </TagName>
-      </div>
     );
   }
 }
