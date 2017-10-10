@@ -27,10 +27,10 @@ class Heading extends React.Component {
     const value = this.getText();
     return (
       <div className='block-wrap'>
+        <DropTarget id={this.props.id} />
         <TagName>
           <input type="text" value={value} onChange={this.setText.bind(this)}/>
         </TagName>
-        <DropTarget id={this.props.id} />
       </div>
     );
   }

@@ -20,8 +20,8 @@ class App extends Component {
             <Module />
           </div>
           <div className="anc-builder">
-            <DropTarget id="" />
             { blocks }
+            <DropTarget id="" />
           </div>
         </div>
       </div>
