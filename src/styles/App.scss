@@ -47,3 +47,15 @@ $xy-grid: false;
     border-color: red;
   }
 }
+
+.block-handle{
+  display: flex;
+  justify-content: space-between;
+  background-color: #00ACF2;
+  color: white;
+  cursor: move;
+  .button{
+    margin: 0;
+    color: white;
+  }
+}
