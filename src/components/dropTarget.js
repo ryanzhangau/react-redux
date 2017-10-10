@@ -27,8 +27,8 @@ class DropTarget extends React.Component {
   }
 
   drop(e) {
-    console.log(this.props.id)
     const data = JSON.parse(e.dataTransfer.getData('opts'));
+    data.dropAt = this.props.id;
     this.props.addBlock(data);
     this.setState({ dragEnter: false });
   }
