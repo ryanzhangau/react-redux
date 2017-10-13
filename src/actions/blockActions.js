@@ -10,6 +10,13 @@ export const addBlock  = (block) => {
 export const updateData = (blockId, newData) => {
   store.dispatch({
     type: 'CHANGE_SETTINGS',
-    payload: {id: blockId, data: newData}
+    payload: {id: blockId, data: newData},
+  })
+}
+
+export const removeBlock = (blockId) => {
+  store.dispatch({
+    type: 'REMOVE_BLOCK',
+    payload: blockId
   })
 }

@@ -6,6 +6,7 @@ export default (state={ sub:[],blocks:[] }, action) => {
       break;
     }
     case 'REMOVE_BLOCK': {
+      removeBlock(newState, action.payload);
       break;
     }
     case 'MOVE_BLOCK': {
@@ -45,3 +46,25 @@ const insertBlock = (state, block) => {
     state.blocks.push({ ...block, id });
   }
 }
+
+const removeBlock = (state, blockId) => {
+
+  const block = state.blocks.filter(b => b.id === blockId)[0];
+
+  // remove block
+  state.blocks = state.blocks.filter(b => b.id !== blockId);
+
+  // remove id
+  const idIndex = state.sub.indexOf(blockId);
+
+  if (idIndex > -1)
+    state.sub.splice(idIndex, 1);
+  else {
+   const subIndex =  block.b.sub.indexOf(blockId);
+    if (subIndex > -1)
+      block.b.sub.splice(subIndex, 1);
+    else
+      console.log('block does not exist in state');
+  }
+}
+

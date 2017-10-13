@@ -1,10 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { removeBlock } from "../../actions/blockActions";
 import DropTarget from '../dropTarget';
 import Heading from './Heading';
 import Text from './Text';
 import Image from './Image';
 
-export default class Block extends React.Component {
+class Block extends React.Component {
+
+  remove(id){
+    console.log(id);
+    this.props.removeBlock(id);
+  }
 
   render() {
     const components = {
@@ -22,7 +29,7 @@ export default class Block extends React.Component {
               <i className="fa fa-fw fa-pencil-square-o"></i>
             </a>
             <div>{this.props.tag}</div>
-            <a className='button alert tiny'>
+            <a className='button alert tiny' data-id={this.props.id} onClick={() => this.remove(this.props.id)}>
               <i className="fa fa-fw fa-trash"></i>
             </a>
           </div>
@@ -36,3 +43,17 @@ export default class Block extends React.Component {
     }
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    blockData: state.blockReducer
+  }
+}
+
+const mapDispatchToProps = () => {
+  return {
+    removeBlock,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Block);
