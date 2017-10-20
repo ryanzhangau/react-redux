@@ -15,18 +15,16 @@ export default class Module extends React.Component {
     }
   }
 
-  dragstart(e, data) {
+  dragStart(e, data) {
     e.dataTransfer.setData('opts', JSON.stringify(data));
   }
 
-  dragend() {
-    console.log('drag end');
-  }
+
   render() {
     const blocks = this.state.modules.map((b) => {
        return  <div className={`module ${b.block.name}`} key={b.block.order} draggable="true"
-             onDragStart={(e) => this.dragstart(e, b.data)}
-             onDragEnd={this.dragend}
+             onDragStart={(e) => this.dragStart(e, b.data)}
+             onDragEnd={this.dragEnd}
         >
           <i className={`fa fa-fw fa-${b.block.icon}`}></i>
           <p>{b.block.name}</p>
