@@ -7,10 +7,22 @@ import Text from './Text';
 import Image from './Image';
 
 class Block extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { droppable: true }
+  }
 
   remove(id){
-    console.log(id);
     this.props.removeBlock(id);
+  }
+
+  dragStart(e, data) {
+    e.dataTransfer.setData('opts', JSON.stringify(data));
+    this.setState({ droppable: false });
+  }
+
+  dragEnd() {
+    this.setState({ droppable: true })
   }
 
   render() {
@@ -20,25 +32,28 @@ class Block extends React.Component {
       Image,
     };
 
-    if (components.hasOwnProperty(this.props.tag)){
-      const TagName = components[this.props.tag];
+    if (components.hasOwnProperty(this.props.block.type)){
+      const TagName = components[this.props.block.type];
       return (
         <div className="block-wrap">
-          <div className="block-handle">
+          <div className="block-handle" draggable="true"
+               onDragStart={(e) => this.dragStart(e, this.props.block.data)}
+               onDragEnd={this.dragEnd.bind(this)}
+          >
             <a className='button success tiny'>
               <i className="fa fa-fw fa-pencil-square-o"></i>
             </a>
-            <div>{this.props.tag}</div>
-            <a className='button alert tiny' data-id={this.props.id} onClick={() => this.remove(this.props.id)}>
+            <div>{this.props.block.type}</div>
+            <a className='button alert tiny' data-id={this.props.block.id} onClick={() => this.remove(this.props.block.id)}>
               <i className="fa fa-fw fa-trash"></i>
             </a>
           </div>
-          <DropTarget id={this.props.id} />
-          <TagName id={this.props.id}/>
+          <DropTarget id={this.props.block.id} />
+          <TagName id={this.props.block.id} droppable={this.state.droppable}/>
         </div>)
     }else{
       return <div className="block-wrap">
-        {`Cannot find component ${this.props.tag}`}
+        {`Cannot find component ${this.props.block.type}`}
         </div>
     }
   }

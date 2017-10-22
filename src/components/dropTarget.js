@@ -14,7 +14,8 @@ class DropTarget extends React.Component {
   }
 
   dragEnger() {
-    this.setState({ dragEnter: true });
+    if (this.props.droppable)
+      this.setState({ dragEnter: true });
   }
 
   dragLeave() {
@@ -27,9 +28,12 @@ class DropTarget extends React.Component {
   }
 
   drop(e) {
-    const data = JSON.parse(e.dataTransfer.getData('opts'));
-    data.dropAt = this.props.id;
-    this.props.addBlock(data);
+    if (this.props.droppable) {
+      const data = JSON.parse(e.dataTransfer.getData('opts'));
+      data.dropAt = this.props.id;
+      console.log('data',data);
+      this.props.addBlock(data);
+    }
     this.setState({ dragEnter: false });
   }
 

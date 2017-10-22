@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     const blocks = this.props.blockData.blocks.map(
       (block) => {
-        return <Block key={block.id} id={block.id} tag={block.type}/>
+        return <Block key={block.id} block={block}/>
       });
     return (
       <div className="App">
@@ -21,7 +21,7 @@ class App extends Component {
           </div>
           <div className="anc-builder">
             { blocks }
-            <DropTarget id="" />
+            <DropTarget id="" droppable={true} />
           </div>
         </div>
       </div>
